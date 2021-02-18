@@ -5,10 +5,7 @@
 //////////////////////// Set-Up //////////////////////////////
 //////////////////////////////////////////////////////////////
 
-var margin = { top: 100, right: 100, bottom: 100, left: 100 },
-    width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-    height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-var nameDiv = document.getElementById("nameHolder");
+
 
 //////////////////////////////////////////////////////////////
 ////////////////////////// Data //////////////////////////////
@@ -22,15 +19,6 @@ var nameDiv = document.getElementById("nameHolder");
 // });
 
 // console.log(loadedData)
-
-var outputData = [[
-    { axis: "Information Visualization", value: 0 },
-    { axis: "Statistical", value: 0 },
-    { axis: "Programming", value: 0},
-    { axis: "Human-computer interaction programming", value: 0 },
-    { axis: "Evaluating", value: 0 },
-    { axis: "Collaboration", value: 0 }
-]]
 
 var avgVis = 0
 var avgStat = 0
@@ -153,17 +141,6 @@ var avgColl = 0
 //////////////////// Draw the Chart //////////////////////////
 //////////////////////////////////////////////////////////////
 
-var color = d3.scale.ordinal()
-    .range(["#EDC951", "#CC333F", "#00A0B0"]);
 
-var radarChartOptions = {
-    w: width,
-    h: height,
-    margin: margin,
-    maxValue: 10,
-    levels: 5,
-    roundStrokes: true,
-    color: color
-};
 //Call function to draw the Radar chart
-RadarChart("#radarChart", outputData, radarChartOptions);
+//RadarChart("#radarChart", outputData, radarChartOptions);
