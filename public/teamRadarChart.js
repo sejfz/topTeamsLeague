@@ -1,8 +1,9 @@
-var ldata = []
 var margin = { top: 100, right: 100, bottom: 100, left: 100 },
     width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
 var nameDiv = document.getElementById("nameHolder");
+
 var color = d3.scale.ordinal()
     .range(["#EDC951", "#CC333F", "#00A0B0"]);
 
@@ -30,10 +31,6 @@ d3.csv("player-stats.csv", function(data) {
         {axis: "Deaths", value: data[1].D},
         {axis: "Assists", value: data[1].A}
     ]]
-    // for (var i = 0; i < data.length; i++) {
-
-    //     tempArr.push(data[i]);
-    // }
 
     return RadarChart("#radarChart", tempArr, radarChartOptions);
 })
