@@ -48,20 +48,39 @@
     <div class="pageContent">
     
         <div class="row playerForm">
-            <div class="col-8 p-0">
+            <div id="playerSelect">
+
+            </div>
+            <!-- <div class="col-8 p-0">
                 <select class="form-select form-select-sm"  id="playerSelect">
                     <option></option>
                 </select>
             </div>
             <div class="col-4 p-0">
                 <button class="btn btn-sm btn-primary" onclick="updatePlayer()">Search</button>
-            </div>
+            </div> -->
         </div>
-        <div style="text-align: left;" class="profileDiv">
-            <img src="default_profile.jpg" id="profilePicture">
-            <p id="playerName">Player Name</p>
-            <p id="playerTeam">Player Team</p>
-            <p id="playerPos">Player Pos</p>
+        <div id="playerProfiles">
+            <template id="playerCardTemplate">
+                <div class="card mb-1 playerCard" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                        <img src="default_profile.jpg" id="profilePicture">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="delete">×</p>
+                            <h6 class="card-title playerName">Player Name</h6>
+                            <span id="playerTeam">Player Team</span> </br>
+                            <span id="playerPos"><small>Player Pos</small></span>
+                            <div class="playerColour">
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </template>
         </div>
         <div id="radarChart"></div>
     </div>
