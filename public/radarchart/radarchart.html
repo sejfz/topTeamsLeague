@@ -46,7 +46,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     
     <div class="pageContent">
-    
+        <header id="header">
+            <h3 id="ttl">TopTeamsLeague</h3>
+        </header>
+        
+        <div id="headlineRow">
+            <h4 id="headline1">Players</h4>
+            <h4 id="headline2">Selected</h4>
+            <div id="filterRow">
+                <h6 style="align-self: flex-end;">Filter: </h6>
+                <select class="form-select form-select-sm" id="teamSelect" onchange="filterPlayers('team', this.value)">
+                    <option value="" disabled selected hidden>Team</option>
+                </select>
+                <select class="form-select form-select-sm" id="roleSelect" onchange="filterPlayers('role', this.value)">
+                    <option value="" disabled selected hidden>Role</option>
+                </select>
+                <select class="form-select form-select-sm" id="sortBySelect" onchange="filterPlayers('sortBy', this.value)">
+                    <option value="" disabled selected hidden>Sort by</option>
+                    <option value="alphabetically">Alphabetically</option>
+                    <option value="Highest kill participation">Highest kill participation</option>
+                    <option value="Most damage">Most damage</option>
+                    <option value="Highest winrate">Highest winrate</option>
+                </select>
+            </div>
+        </div>
         <div class="row playerForm">
             <div id="playerSelect">
 
@@ -60,6 +83,8 @@
                 <button class="btn btn-sm btn-primary" onclick="updatePlayer()">Search</button>
             </div> -->
         </div>
+        
+        
         <div id="playerProfiles">
             <template id="playerCardTemplate">
                 <div class="card mb-1 playerCard" style="max-width: 540px;">

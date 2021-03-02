@@ -12,12 +12,11 @@ var outputData = [[
     { axis: "Damage", value: 0 }
 ]]
 var playerSelect = document.getElementById("playerSelect");
-
-var nameDiv = document.getElementById("nameHolder");
-var playerName = document.getElementById("playerName");
-var playerTeam = document.getElementById("playerTeam");
-var playerPos = document.getElementById("playerPos");
+var roles = []
+var teams = []
+var sortingAlts = []
 var colourArray = ["#00A0B0"]
+
 var color = d3.scale.ordinal()
     .range(colourArray);
 
@@ -31,7 +30,7 @@ var radarChartOptions = {
     color: color
 };
 
-function getRandomColor() {
+function getRandomColor() { // generates a random colour when a player is selected
   var letters = '0123456789ABCDEF';
   var color = '#';
   for (var i = 0; i < 6; i++) {
@@ -40,7 +39,7 @@ function getRandomColor() {
   return color;
 }
 
-d3.csv("../player-stats.csv", function(data) {
+d3.csv("../player-stats.csv", function(data) { // loop through the excel document to extract the data and create an object we can use later
     for (let i =0; i<data.length; i++) {
         let playerName = document.createElement("p");
         playerName.innerHTML = data[i].Player
@@ -49,6 +48,26 @@ d3.csv("../player-stats.csv", function(data) {
         playerName.onclick = function() { selectplayer(parseInt(playerName.id)) };
         playerSelect.appendChild(playerName)
         data[i].id = i;
+        if (!roles.includes(data[i].Pos)) {
+            roles.push(data[i].Pos)
+        }
+        if (!teams.includes(data[i].Team)) {
+            teams.push(data[i].Team)
+        }
+    }
+    for (let i=0; i<teams.length; i++) {
+        let teamName = document.createElement("option");
+        teamName.innerHTML = teams[i]
+        teamName.value = teams[i].toLowerCase()
+        teamName.onclick = function() { filterPlayers("team", teams[i]) };
+        document.getElementById("teamSelect").appendChild(teamName)
+    }
+    for (let i=0; i<roles.length; i++) {
+        let roleName = document.createElement("option");
+        roleName.innerHTML = roles[i]
+        roleName.value = roles[i].toLowerCase()
+        // playerName.onclick = function() { selectplayer(parseInt(playerName.id)) };
+        document.getElementById("roleSelect").appendChild(roleName)
     }
     playerInfoArray = data
     
@@ -57,7 +76,7 @@ d3.csv("../player-stats.csv", function(data) {
     colourArray.splice(0, 1)
 })
 
-function selectplayer(id) {
+function selectplayer(id) { // When a player is selected from the list, a card is created from the <template> tag with the player's info
     for (let i=0; i<selectedPlayers.length; i++) {
         if (selectedPlayers[i].id === id) {
             return
@@ -78,7 +97,7 @@ function selectplayer(id) {
     addPlayer(id)
 }
 
-function addPlayer(playerId) {
+function addPlayer(playerId) { // add a player to the selectedPLayers array and add their colour to colourArray
     selectedPlayers.push(playerInfoArray[playerId])
     colourArray.push(playerInfoArray[playerId].playerColour)
     updatePlayer()
@@ -86,12 +105,10 @@ function addPlayer(playerId) {
 
 function updatePlayer() {
     outputData = []
-    //colourArray = []
     
     for (let i=0; i<selectedPlayers.length; i++) {
-        // colourArray.push(selectedPlayers[i].playerColour)
-        // console.log(colourArray)   
-        let tempArr = [
+        let tempArr = [ 
+            // add all selected players to outputData to display them in the radar chart
             {axis: "Win rate", value: parseFloat(selectedPlayers[i]["W%"])},
             {axis: "First blood rate", value: parseFloat(selectedPlayers[i]["FB%"])},
             {axis: "Kill participation", value: parseFloat(selectedPlayers[i]["KP"])},
@@ -101,16 +118,12 @@ function updatePlayer() {
         ]
         outputData.push(tempArr)
     }
-    //console.log(radarChartOptions.color)
     return RadarChart("#radarChart", outputData, radarChartOptions);
 }
 
-function removePlayer(id) {
-    let removePlayerId = null;
-    for (let i=0; i<selectedPlayers.length; i++) {
-        console.log({play: selectedPlayers[i].id, id: id})
+function removePlayer(id) { // removes player when pressing x on playercard
+    for (let i=0; i<selectedPlayers.length; i++) { // loops through all selected players to find the player to remove, also removes their colour from colourArray
         if (selectedPlayers[i].id === id) {
-            
             for (let j=0; j<colourArray.length; j++) {
                 if (selectedPlayers[i].playerColour === colourArray[j]) {
                     colourArray.splice(j, 1)
@@ -121,7 +134,7 @@ function removePlayer(id) {
     }
     
     document.getElementById("player_" + id).remove()
-    if (selectedPlayers.length<1) {
+    if (selectedPlayers.length<1) { // if there are no selected players, use standard object to not break the radar chart
         outputData = [[
             { axis: "Win rate", value: 0 },
             { axis: "First blood rate", value: 0 },
@@ -134,6 +147,57 @@ function removePlayer(id) {
     } else {
         updatePlayer()
     }
-    
+}
 
+function filterPlayers(filterType, filterBy) {
+    if (filterType === "team") {
+        playerInfoArray.filter(player => {
+            if (!(player.Team.toLowerCase() === filterBy.toLowerCase())) {
+                document.getElementById(player.id).style.display = 'none'
+            }
+            else {
+                document.getElementById(player.id).style.display = 'block'
+            }
+        })
+    } else if (filterType === "role") {
+        playerInfoArray.filter(player => {
+            if (!(player.Pos.toLowerCase() === filterBy.toLowerCase())) {
+                document.getElementById(player.id).style.display = 'none'
+            }
+            else {
+                document.getElementById(player.id).style.display = 'block'
+            }
+        })
+    } else if (filterType === "sortBy") {
+        var divCard = playerSelect.children
+        divCard = Array.prototype.slice.call(divCard)
+        if (filterBy.toLowerCase() === "alphabetically".toLowerCase())
+            divCard.sort(function(a, b) {
+                if (a.textContent < b.textContent)
+                    return -1;
+                if (a.textContent > b.textContent)
+                    return 1;
+                return 0;
+            })
+        if (filterBy.toLowerCase() === "Highest kill Participation".toLowerCase()) {
+            divCard.sort(function(a, b){
+                return parseFloat(playerInfoArray[a.id]['KP']) - parseFloat(playerInfoArray[b.id]['KP'])
+            })
+        }
+        if (filterBy.toLowerCase() === "Most damage".toLowerCase()) {
+            divCard.sort(function(a, b){
+                return parseFloat(playerInfoArray[a.id]['DMG%']) - parseFloat(playerInfoArray[b.id]['DMG%'])
+            })
+        }
+        if (filterBy.toLowerCase() === "Highest winrate".toLowerCase()) {
+            divCard.sort(function(a, b){
+                //console.log(parseFloat(playerInfoArray[a.id]["W%"]))
+                return parseFloat(playerInfoArray[a.id]["W%"]) - parseFloat(playerInfoArray[b.id]["W%"])
+            })
+        }
+        playerSelect.innerHTML = ''
+        for (let i = 0; i < divCard.length; i++) {
+            playerSelect.appendChild(divCard[i]);
+        }
+    }
 }
