@@ -1,0 +1,15 @@
+#scrolltable {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.tableDiv {
+    grid-row: 2;
+    overflow: hidden;
+}
+
+.pageWrapper {
+    display: grid;
+    grid-template-rows: 510.8px calc(100vh - 510.8px);
+}
+
