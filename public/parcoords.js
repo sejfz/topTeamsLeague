@@ -4,18 +4,18 @@ var margin = {top: 66, right: 110, bottom: 20, left: 188},
     innerHeight = height - 2;
 
 var devicePixelRatio = window.devicePixelRatio || 1;
-
+var colorArray = ["#5DA5B3"]
 var color = d3.scaleOrdinal()
-  .range(["#5DA5B3","#D58323","#DD6CA7","#54AF52","#8C92E8","#E15E5A","#725D82","#776327","#50AB84","#954D56","#AB9C27","#517C3F","#9D5130","#357468","#5E9ACF","#C47DCB","#7D9E33","#DB7F85","#BA89AD","#4C6C86","#B59248","#D8597D","#944F7E","#D67D4B","#8F86C2"]);
+  .range(colorArray);
 
-/*var color = function getRandomColor() { // generates a random colour when a player is selected
+function getRandomColor() { // generates a random colour when a player is selected
   var letters = '0123456789ABCDEF';
   var color = '#';
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
-}*/
+}
 var types = {
   "Number": {
     key: "Number",
@@ -237,6 +237,7 @@ d3.csv("player-stats.csv", function(error, data) {
   // shuffle the data!
   data = d3.shuffle(data);
   data.forEach(function(d) {
+    d.color = getRandomColor()
     dimensions.forEach(function(p) {
       d[p.key] = !d[p.key] ? null : p.type.coerce(d[p.key]);
     });
@@ -296,35 +297,36 @@ d3.csv("player-stats.csv", function(error, data) {
   d3.selectAll(".axis.Team .tick text")
     .style("fill", color);
   //console.log(Object.keys(data.slice(0,24)[0]))
-  for (let i=0; i<data.slice(0,24).length; i++) {
+  var dataArr = data.slice(0,-1);
+  for (let i=0; i<dataArr.length; i++) {
     var temp = document.getElementById("tableRowTemplate");
     var clon = temp.content.cloneNode(true);
-
-    clon.querySelector(".Player").textContent = data.slice(0,24)[i].Player
-    clon.querySelector(".Team").textContent = data.slice(0,24)[i].Team
-    clon.querySelector(".Pos").textContent = data.slice(0,24)[i].Pos
-    clon.querySelector(".GP").textContent = data.slice(0,24)[i].GP
-    clon.querySelector(".W").textContent = data.slice(0,24)[i]["W%"]
-    clon.querySelector(".CTR").textContent = data.slice(0,24)[i]["CTR%"]
-    clon.querySelector(".K").textContent = data.slice(0,24)[i].K
-    clon.querySelector(".D").textContent = data.slice(0,24)[i].D
-    clon.querySelector(".A").textContent = data.slice(0,24)[i].A
-    clon.querySelector(".KDA").textContent = data.slice(0,24)[i].KDA
-    clon.querySelector(".KP").textContent = data.slice(0,24)[i].KP
-    clon.querySelector(".KS").textContent = data.slice(0,24)[i]["KS%"]
-    clon.querySelector(".DTH").textContent = data.slice(0,24)[i]["DTH%"]
-    clon.querySelector(".FB").textContent = data.slice(0,24)[i]["FB%"]
-    clon.querySelector(".GD10").textContent = data.slice(0,24)[i].GD10
-    clon.querySelector(".XPD10").textContent = data.slice(0,24)[i].XPD10
-    clon.querySelector(".CSD10").textContent = data.slice(0,24)[i].CSD10
-    clon.querySelector(".CSPM").textContent = data.slice(0,24)[i].CSPM
-    clon.querySelector(".CSP15").textContent = data.slice(0,24)[i]["CS%P15"]
-    clon.querySelector(".DPM").textContent = data.slice(0,24)[i].DPM
-    clon.querySelector(".DMG").textContent = data.slice(0,24)[i]["DMG%"]
-    clon.querySelector(".EGPM").textContent = data.slice(0,24)[i].EGPM
-    clon.querySelector(".GOLD").textContent = data.slice(0,24)[i]["GOLD%"]
-    clon.querySelector(".WPM").textContent = data.slice(0,24)[i].WPM
-    clon.querySelector(".WCPM").textContent = data.slice(0,24)[i].WCPM
+    clon.querySelector(".Player").style.backgroundColor = dataArr[i].color
+    clon.querySelector(".Player").textContent = dataArr[i].Player
+    clon.querySelector(".Team").textContent = dataArr[i].Team
+    clon.querySelector(".Pos").textContent = dataArr[i].Pos
+    clon.querySelector(".GP").textContent = dataArr[i].GP
+    clon.querySelector(".W").textContent = dataArr[i]["W%"]
+    clon.querySelector(".CTR").textContent = dataArr[i]["CTR%"]
+    clon.querySelector(".K").textContent = dataArr[i].K
+    clon.querySelector(".D").textContent = dataArr[i].D
+    clon.querySelector(".A").textContent = dataArr[i].A
+    clon.querySelector(".KDA").textContent = dataArr[i].KDA
+    clon.querySelector(".KP").textContent = dataArr[i].KP
+    clon.querySelector(".KS").textContent = dataArr[i]["KS%"]
+    clon.querySelector(".DTH").textContent = dataArr[i]["DTH%"]
+    clon.querySelector(".FB").textContent = dataArr[i]["FB%"]
+    clon.querySelector(".GD10").textContent = dataArr[i].GD10
+    clon.querySelector(".XPD10").textContent = dataArr[i].XPD10
+    clon.querySelector(".CSD10").textContent = dataArr[i].CSD10
+    clon.querySelector(".CSPM").textContent = dataArr[i].CSPM
+    clon.querySelector(".CSP15").textContent = dataArr[i]["CS%P15"]
+    clon.querySelector(".DPM").textContent = dataArr[i].DPM
+    clon.querySelector(".DMG").textContent = dataArr[i]["DMG%"]
+    clon.querySelector(".EGPM").textContent = dataArr[i].EGPM
+    clon.querySelector(".GOLD").textContent = dataArr[i]["GOLD%"]
+    clon.querySelector(".WPM").textContent = dataArr[i].WPM
+    clon.querySelector(".WCPM").textContent = dataArr[i].WCPM
 
     document.getElementById("tableBody").appendChild(clon);
   }
@@ -341,7 +343,10 @@ d3.csv("player-stats.csv", function(error, data) {
   };
 
   function draw(d) {
-    ctx.strokeStyle = color(d.Team);
+    //colorArray.push(getRandomColor())
+    // let newColor = getRandomColor(d.Player)
+    // d.color = newColor
+    ctx.strokeStyle = d.color; //getRandomColor(d.Player)
     ctx.beginPath();
     var coords = project(d);
     coords.forEach(function(p,i) {
@@ -405,67 +410,41 @@ d3.csv("player-stats.csv", function(error, data) {
       }
     });
 
-    // show ticks for active brush dimensions
-    // and filter ticks to only those within brush extents
-    /*
-    svg.selectAll(".axis")
-        .filter(function(d) {
-          return actives.indexOf(d) > -1 ? true : false;
-        })
-        .classed("active", true)
-        .each(function(dimension, i) {
-          var extent = extents[i];
-          d3.select(this)
-            .selectAll(".tick text")
-            .style("display", function(d) {
-              var value = dimension.type.coerce(d);
-              return dimension.type.within(value, extent, dimension) ? null : "none";
-            });
-        });
-
-    // reset dimensions without active brushes
-    svg.selectAll(".axis")
-        .filter(function(d) {
-          return actives.indexOf(d) > -1 ? false : true;
-        })
-        .classed("active", false)
-        .selectAll(".tick text")
-          .style("display", null);
-    */
-
     ctx.clearRect(0,0,width,height);
     ctx.globalAlpha = d3.min([0.85/Math.pow(selected.length,0.3),1]);
     render(selected);
     document.getElementById("tableBody").innerHTML= ''
-    for (let i=0; i<selected.slice(0,24).length; i++) {
+    for (let i=0; i<selected.slice(0,-1).length; i++) {
       var temp2 = document.getElementById("tableRowTemplate");
       var clon = temp2.content.cloneNode(true);
-  
-      clon.querySelector(".Player").textContent = selected.slice(0,24)[i].Player
-      clon.querySelector(".Team").textContent = selected.slice(0,24)[i].Team
-      clon.querySelector(".Pos").textContent = selected.slice(0,24)[i].Pos
-      clon.querySelector(".GP").textContent = selected.slice(0,24)[i].GP
-      clon.querySelector(".W").textContent = selected.slice(0,24)[i]["W%"]
-      clon.querySelector(".CTR").textContent = selected.slice(0,24)[i]["CTR%"]
-      clon.querySelector(".K").textContent = selected.slice(0,24)[i].K
-      clon.querySelector(".D").textContent = selected.slice(0,24)[i].D
-      clon.querySelector(".A").textContent = selected.slice(0,24)[i].A
-      clon.querySelector(".KDA").textContent = selected.slice(0,24)[i].KDA
-      clon.querySelector(".KP").textContent = selected.slice(0,24)[i].KP
-      clon.querySelector(".KS").textContent = selected.slice(0,24)[i]["KS%"]
-      clon.querySelector(".DTH").textContent = selected.slice(0,24)[i]["DTH%"]
-      clon.querySelector(".FB").textContent = selected.slice(0,24)[i]["FB%"]
-      clon.querySelector(".GD10").textContent = selected.slice(0,24)[i].GD10
-      clon.querySelector(".XPD10").textContent = selected.slice(0,24)[i].XPD10
-      clon.querySelector(".CSD10").textContent = selected.slice(0,24)[i].CSD10
-      clon.querySelector(".CSPM").textContent = selected.slice(0,24)[i].CSPM
-      clon.querySelector(".CSP15").textContent = selected.slice(0,24)[i]["CS%P15"]
-      clon.querySelector(".DPM").textContent = selected.slice(0,24)[i].DPM
-      clon.querySelector(".DMG").textContent = selected.slice(0,24)[i]["DMG%"]
-      clon.querySelector(".EGPM").textContent = selected.slice(0,24)[i].EGPM
-      clon.querySelector(".GOLD").textContent = selected.slice(0,24)[i]["GOLD%"]
-      clon.querySelector(".WPM").textContent = selected.slice(0,24)[i].WPM
-      clon.querySelector(".WCPM").textContent = selected.slice(0,24)[i].WCPM
+
+      clon.querySelector(".Player").style.backgroundColor = selected.slice(0,-1)[i].color
+
+      clon.querySelector(".Player").textContent = selected.slice(0,-1)[i].Player
+      clon.querySelector(".Team").textContent = selected.slice(0,-1)[i].Team
+      clon.querySelector(".Pos").textContent = selected.slice(0,-1)[i].Pos
+      clon.querySelector(".GP").textContent = selected.slice(0,-1)[i].GP
+      clon.querySelector(".W").textContent = selected.slice(0,-1)[i]["W%"]
+      clon.querySelector(".CTR").textContent = selected.slice(0,-1)[i]["CTR%"]
+      clon.querySelector(".K").textContent = selected.slice(0,-1)[i].K
+      clon.querySelector(".D").textContent = selected.slice(0,-1)[i].D
+      clon.querySelector(".A").textContent = selected.slice(0,-1)[i].A
+      clon.querySelector(".KDA").textContent = selected.slice(0,-1)[i].KDA
+      clon.querySelector(".KP").textContent = selected.slice(0,-1)[i].KP
+      clon.querySelector(".KS").textContent = selected.slice(0,-1)[i]["KS%"]
+      clon.querySelector(".DTH").textContent = selected.slice(0,-1)[i]["DTH%"]
+      clon.querySelector(".FB").textContent = selected.slice(0,-1)[i]["FB%"]
+      clon.querySelector(".GD10").textContent = selected.slice(0,-1)[i].GD10
+      clon.querySelector(".XPD10").textContent = selected.slice(0,-1)[i].XPD10
+      clon.querySelector(".CSD10").textContent = selected.slice(0,-1)[i].CSD10
+      clon.querySelector(".CSPM").textContent = selected.slice(0,-1)[i].CSPM
+      clon.querySelector(".CSP15").textContent = selected.slice(0,-1)[i]["CS%P15"]
+      clon.querySelector(".DPM").textContent = selected.slice(0,-1)[i].DPM
+      clon.querySelector(".DMG").textContent = selected.slice(0,-1)[i]["DMG%"]
+      clon.querySelector(".EGPM").textContent = selected.slice(0,-1)[i].EGPM
+      clon.querySelector(".GOLD").textContent = selected.slice(0,-1)[i]["GOLD%"]
+      clon.querySelector(".WPM").textContent = selected.slice(0,-1)[i].WPM
+      clon.querySelector(".WCPM").textContent = selected.slice(0,-1)[i].WCPM
   
       document.getElementById("tableBody").appendChild(clon);
     }

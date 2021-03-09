@@ -1,11 +1,11 @@
 #scrolltable {
-    height: 100%;
+    height: calc(100% - 32.8px);
     overflow-y: scroll;
 }
 
 .tableDiv {
     grid-row: 2;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .pageWrapper {
@@ -13,3 +13,45 @@
     grid-template-rows: 510.8px calc(100vh - 510.8px);
 }
 
+.Player {
+    width: 100px;
+}
+.Team {
+    width: 150px;
+}
+
+.Pos {
+    width: 50px;
+}
+
+.tableFixHead {
+    
+    height: 100px; 
+}
+.tableDiv thead th {
+    position: sticky;
+    top: 0;
+    height: 32px;
+    background-color: lightgrey;
+}
+
+.yoyo .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  
+  .yoyo:hover .tooltiptext {
+    visibility: visible;
+  }
