@@ -1,3 +1,35 @@
+svg {
+  font: 10px sans-serif;
+}
+
+.background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  stroke: rgb(240, 132, 31);
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  font-family: "Open Sans", sans-serif;
+}
 .bar.positive {
   fill: steelblue;
 }
@@ -8,7 +40,6 @@
 
 .axis text {
   font: 10px sans-serif;
-  cursor: pointer;
 }
 
 .axis path,
@@ -23,7 +54,6 @@ body {
   font-size: 11px;
   font-weight: 300;
   fill: #242424;
-  text-align: center;
   /* text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; */
   cursor: default;
 }
@@ -53,15 +83,15 @@ body {
   font-style: italic;
   font-weight: bold;
 }
-.profilePicture {
+#profilePicture {
   height: 100px;
-  width: auto;
+  width: 90px;
   padding: 0;
 }
 
 .pageContent {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 3fr;
   grid-template-rows: 50px 50px calc(100vh - 100px);
 }
 
@@ -125,7 +155,7 @@ body {
   grid-column-start: 1;
   grid-column-end: -1;
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 3fr;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);;
   border-bottom-style: solid;
 }
@@ -147,18 +177,82 @@ body {
   text-align: left;
 }
 
-#textColumn {
-  grid-column: 1;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-end;
+.parcoords {
+  display: inline-block;
+  
 }
 
-#resetButton {
-  margin-left: auto;
-  margin-right: 5px;
-  align-self: flex-end;
+.parcoords svg,
+.parcoords canvas {
+  font: 10px sans-serif;
+  position: absolute;
+}
+
+.parcoords canvas {
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.axis .title {
   font-size: 10px;
-  color: blue;
-  cursor: pointer;
+  transform: rotate(-21deg) translate(-5px,-6px);
+  fill: #222;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1px;
+}
+
+.axis .tick text {
+  fill: #222;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.axis.WCPM .tick text,
+.axis.Team .tick text {
+  opacity: 1;
+}
+
+.axis:hover line,
+.axis:hover path,
+.axis.active line,
+.axis.active path {
+  fill: none;
+  stroke: #222;
+  stroke-width: 1px;
+}
+
+.axis:hover .title {
+  font-weight: bold;
+}
+
+.axis:hover .tick text {
+  opacity: 1;
+}
+
+.axis.active .title {
+  font-weight: bold;
+}
+
+.axis.active .tick text {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+pre {
+  width: 100%;
+  margin: 6px 12px;
+  tab-size: 25;
+  font-size: 10px;
+  overflow: auto;
 }

@@ -16,13 +16,14 @@ var roles = []
 var teams = []
 var sortingAlts = []
 var colourArray = ["#00A0B0"]
+var activeFilters = {teamFilter: false, roleFilter: false}
 
 var color = d3.scale.ordinal()
     .range(colourArray);
 
 var radarChartOptions = {
-    w: 300,
-    h: 300,
+    w: 440,
+    h: 440,
     margin: margin,
     maxValue: 100,
     levels: 5,
@@ -49,6 +50,8 @@ d3.csv("../player-stats.csv", function(data) { // loop through the excel documen
         playerName.onclick = function() { selectplayer(parseInt(playerName.id)) };
         playerSelect.appendChild(playerName)
         data[i].id = i;
+        data[i].teamFilter = true;
+        data[i].roleFilter = true;
         if (!roles.includes(data[i].Pos)) {
             roles.push(data[i].Pos)
         }
@@ -88,6 +91,7 @@ function selectplayer(id) { // When a player is selected from the list, a card i
     var clon = temp.content.cloneNode(true);
     playerInfoArray[id].playerColour = playerColour
     clon.querySelector(".playerCard").id = "player_" + id
+    clon.querySelector(".profilePicture").src = "PlayerImage/" + playerInfoArray[id].Player.replace(/ /g,"_") + ".png"
     clon.querySelector(".playerName").textContent = playerInfoArray[id].Player
     clon.querySelector(".playerTeam").textContent = playerInfoArray[id].Team
     clon.querySelector(".playerPos").textContent = playerInfoArray[id].Pos
@@ -150,24 +154,43 @@ function removePlayer(id) { // removes player when pressing x on playercard
     }
 }
 
+function resetFilters() {
+    playerInfoArray.map(player => {
+        player.teamFilter = true
+        player.roleFilter = true
+        document.getElementById(player.id).style.display = 'block'
+    })
+    document.getElementById("teamSelect").value = "team"
+    document.getElementById("roleSelect").value = "role"
+    document.getElementById("sortBySelect").value = "sortby"
+    filterPlayers("sortBy", "alphabetically")
+}
+
 function filterPlayers(filterType, filterBy) {
+    if (filterBy === ("sortby" || "team" || "role")){
+        return
+    }
     if (filterType === "team") {
+        activeFilters.teamFilter = true
         playerInfoArray.filter(player => {
             if (!(player.Team.toLowerCase() === filterBy.toLowerCase())) {
-                document.getElementById(player.id).style.display = 'none'
+                player.teamFilter = false
             }
             else {
-                document.getElementById(player.id).style.display = 'block'
+                player.teamFilter = true
             }
+            document.getElementById(player.id).style.display = (player.roleFilter && player.teamFilter ? 'block' : 'none')
         })
     } else if (filterType === "role") {
+        activeFilters.roleFilter = true
         playerInfoArray.filter(player => {
             if (!(player.Pos.toLowerCase() === filterBy.toLowerCase())) {
-                document.getElementById(player.id).style.display = 'none'
+                player.roleFilter = false
             }
             else {
-                document.getElementById(player.id).style.display = 'block'
+                player.roleFilter = true
             }
+            document.getElementById(player.id).style.display = (player.roleFilter && player.teamFilter ? 'block' : 'none')
         })
     } else if (filterType === "sortBy") {
         var divCard = playerSelect.children
@@ -182,18 +205,36 @@ function filterPlayers(filterType, filterBy) {
             })
         if (filterBy.toLowerCase() === "Highest kill Participation".toLowerCase()) {
             divCard.sort(function(a, b){
-                return parseFloat(playerInfoArray[a.id]['KP']) - parseFloat(playerInfoArray[b.id]['KP'])
+                return parseFloat(playerInfoArray[b.id]['KP']) - parseFloat(playerInfoArray[a.id]['KP'])
             })
         }
         if (filterBy.toLowerCase() === "Most damage".toLowerCase()) {
             divCard.sort(function(a, b){
-                return parseFloat(playerInfoArray[a.id]['DMG%']) - parseFloat(playerInfoArray[b.id]['DMG%'])
+                return parseFloat(playerInfoArray[b.id]['DMG%']) - parseFloat(playerInfoArray[a.id]['DMG%'])
             })
         }
         if (filterBy.toLowerCase() === "Highest winrate".toLowerCase()) {
             divCard.sort(function(a, b){
                 //console.log(parseFloat(playerInfoArray[a.id]["W%"]))
-                return parseFloat(playerInfoArray[a.id]["W%"]) - parseFloat(playerInfoArray[b.id]["W%"])
+                return parseFloat(playerInfoArray[b.id]["W%"]) - parseFloat(playerInfoArray[a.id]["W%"])
+            })
+        }
+        if (filterBy.toLowerCase() === "Highest FB".toLowerCase()) {
+            divCard.sort(function(a, b){
+                //console.log(parseFloat(playerInfoArray[a.id]["W%"]))
+                return parseFloat(playerInfoArray[b.id]["FB%"]) - parseFloat(playerInfoArray[a.id]["FB%"])
+            })
+        }
+        if (filterBy.toLowerCase() === "Highest GS".toLowerCase()) {
+            divCard.sort(function(a, b){
+                //console.log(parseFloat(playerInfoArray[a.id]["W%"]))
+                return parseFloat(playerInfoArray[b.id]["GOLD%"]) - parseFloat(playerInfoArray[a.id]["GOLD%"])
+            })
+        }
+        if (filterBy.toLowerCase() === "Highest ASD".toLowerCase()) {
+            divCard.sort(function(a, b){
+                //console.log(parseFloat(playerInfoArray[a.id]["W%"]))
+                return parseFloat(playerInfoArray[b.id]["DTH%"]) - parseFloat(playerInfoArray[a.id]["DTH%"])
             })
         }
         playerSelect.innerHTML = ''
