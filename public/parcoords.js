@@ -413,38 +413,39 @@ d3.csv("player-stats.csv", function(error, data) {
     ctx.clearRect(0,0,width,height);
     ctx.globalAlpha = d3.min([0.85/Math.pow(selected.length,0.3),1]);
     render(selected);
+    console.log(selected)
     document.getElementById("tableBody").innerHTML= ''
-    for (let i=0; i<selected.slice(0,-1).length; i++) {
+    for (let i=0; i<selected.length; i++) {
       var temp2 = document.getElementById("tableRowTemplate");
       var clon = temp2.content.cloneNode(true);
 
-      clon.querySelector(".Player").style.backgroundColor = selected.slice(0,-1)[i].color
+      clon.querySelector(".Player").style.backgroundColor = selected[i].color
 
-      clon.querySelector(".Player").textContent = selected.slice(0,-1)[i].Player
-      clon.querySelector(".Team").textContent = selected.slice(0,-1)[i].Team
-      clon.querySelector(".Pos").textContent = selected.slice(0,-1)[i].Pos
-      clon.querySelector(".GP").textContent = selected.slice(0,-1)[i].GP
-      clon.querySelector(".W").textContent = selected.slice(0,-1)[i]["W%"]
-      clon.querySelector(".CTR").textContent = selected.slice(0,-1)[i]["CTR%"]
-      clon.querySelector(".K").textContent = selected.slice(0,-1)[i].K
-      clon.querySelector(".D").textContent = selected.slice(0,-1)[i].D
-      clon.querySelector(".A").textContent = selected.slice(0,-1)[i].A
-      clon.querySelector(".KDA").textContent = selected.slice(0,-1)[i].KDA
-      clon.querySelector(".KP").textContent = selected.slice(0,-1)[i].KP
-      clon.querySelector(".KS").textContent = selected.slice(0,-1)[i]["KS%"]
-      clon.querySelector(".DTH").textContent = selected.slice(0,-1)[i]["DTH%"]
-      clon.querySelector(".FB").textContent = selected.slice(0,-1)[i]["FB%"]
-      clon.querySelector(".GD10").textContent = selected.slice(0,-1)[i].GD10
-      clon.querySelector(".XPD10").textContent = selected.slice(0,-1)[i].XPD10
-      clon.querySelector(".CSD10").textContent = selected.slice(0,-1)[i].CSD10
-      clon.querySelector(".CSPM").textContent = selected.slice(0,-1)[i].CSPM
-      clon.querySelector(".CSP15").textContent = selected.slice(0,-1)[i]["CS%P15"]
-      clon.querySelector(".DPM").textContent = selected.slice(0,-1)[i].DPM
-      clon.querySelector(".DMG").textContent = selected.slice(0,-1)[i]["DMG%"]
-      clon.querySelector(".EGPM").textContent = selected.slice(0,-1)[i].EGPM
-      clon.querySelector(".GOLD").textContent = selected.slice(0,-1)[i]["GOLD%"]
-      clon.querySelector(".WPM").textContent = selected.slice(0,-1)[i].WPM
-      clon.querySelector(".WCPM").textContent = selected.slice(0,-1)[i].WCPM
+      clon.querySelector(".Player").textContent = selected[i].Player
+      clon.querySelector(".Team").textContent = selected[i].Team
+      clon.querySelector(".Pos").textContent = selected[i].Pos
+      clon.querySelector(".GP").textContent = selected[i].GP
+      clon.querySelector(".W").textContent = selected[i]["W%"]
+      clon.querySelector(".CTR").textContent = selected[i]["CTR%"]
+      clon.querySelector(".K").textContent = selected[i].K
+      clon.querySelector(".D").textContent = selected[i].D
+      clon.querySelector(".A").textContent = selected[i].A
+      clon.querySelector(".KDA").textContent = selected[i].KDA
+      clon.querySelector(".KP").textContent = selected[i].KP
+      clon.querySelector(".KS").textContent = selected[i]["KS%"]
+      clon.querySelector(".DTH").textContent = selected[i]["DTH%"]
+      clon.querySelector(".FB").textContent = selected[i]["FB%"]
+      clon.querySelector(".GD10").textContent = selected[i].GD10
+      clon.querySelector(".XPD10").textContent = selected[i].XPD10
+      clon.querySelector(".CSD10").textContent = selected[i].CSD10
+      clon.querySelector(".CSPM").textContent = selected[i].CSPM
+      clon.querySelector(".CSP15").textContent = selected[i]["CS%P15"]
+      clon.querySelector(".DPM").textContent = selected[i].DPM
+      clon.querySelector(".DMG").textContent = selected[i]["DMG%"]
+      clon.querySelector(".EGPM").textContent = selected[i].EGPM
+      clon.querySelector(".GOLD").textContent = selected[i]["GOLD%"]
+      clon.querySelector(".WPM").textContent = selected[i].WPM
+      clon.querySelector(".WCPM").textContent = selected[i].WCPM
   
       document.getElementById("tableBody").appendChild(clon);
     }

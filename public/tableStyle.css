@@ -6,6 +6,7 @@
 .tableDiv {
     grid-row: 2;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .pageWrapper {
@@ -15,24 +16,19 @@
 
 .Player {
     width: 100px;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 .Team {
     width: 150px;
 }
 
 .Pos {
-    width: 50px;
+    width: 70px;
 }
 
-.tableFixHead {
-    
-    height: 100px; 
-}
-.tableDiv thead th {
-    position: sticky;
-    top: 0;
-    height: 32px;
-    background-color: lightgrey;
+.numberCol {
+    width: 40px;
 }
 
 .yoyo .tooltiptext {
@@ -47,11 +43,18 @@
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    bottom: 100%;
+    top: 100%;
     left: 50%;
     margin-left: -60px;
+  }
+
+  .yoyo {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
   }
   
   .yoyo:hover .tooltiptext {
     visibility: visible;
   }
+

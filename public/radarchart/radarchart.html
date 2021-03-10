@@ -54,19 +54,25 @@
             <h4 id="headline1">Players</h4>
             <h4 id="headline2">Selected</h4>
             <div id="filterRow">
-                <h6 style="align-self: flex-end;">Filter: </h6>
+                <div id="textColumn">
+                    <h6 style="align-self: flex-end;">Filter: </h6>
+                    <h6 id="resetButton" onclick="resetFilters()">Reset</h6>
+                </div>
                 <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="teamSelect" onchange="filterPlayers('team', this.value)">
-                    <option value="" disabled selected hidden>Team</option>
+                    <option value="team" disabled selected hidden>Team</option>
                 </select>
                 <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="roleSelect" onchange="filterPlayers('role', this.value)">
-                    <option value="" disabled selected hidden>Role</option>
+                    <option value="role" disabled selected hidden>Role</option>
                 </select>
                 <select style="margin-bottom: 8px;" class="form-select form-select-sm" id="sortBySelect" onchange="filterPlayers('sortBy', this.value)">
-                    <option value="" disabled selected hidden>Sort by</option>
+                    <option value="sortby" disabled selected hidden>Sort by</option>
                     <option value="alphabetically">Alphabetically</option>
                     <option value="Highest kill participation">Highest kill participation</option>
                     <option value="Most damage">Most damage</option>
                     <option value="Highest winrate">Highest winrate</option>
+                    <option value="Highest FB">Highest First Blood rate</option>
+                    <option value="Highest GS">Highest Gold share</option>
+                    <option value="Highest ASD">Highest avg share of deaths</option>
                 </select>
             </div>
         </div>
@@ -90,7 +96,7 @@
                 <div class="card mb-1 playerCard" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                        <img src="default_profile.jpg" id="profilePicture">
+                        <img src="default_profile.jpg" class="profilePicture">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
