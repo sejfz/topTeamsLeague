@@ -11,7 +11,7 @@
 
 .pageWrapper {
     display: grid;
-    grid-template-rows: 510.8px calc(100vh - 510.8px);
+    grid-template-rows: 520.8px calc(100vh - 520.8px);
 }
 
 .Player {

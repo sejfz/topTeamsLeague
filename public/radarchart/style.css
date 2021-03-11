@@ -42,8 +42,6 @@ body {
   background-color: #416c8a;
   grid-column-start: 1;
   grid-column-end: -1;
-  display: grid;
-  grid-template-columns: 1fr 3fr 2fr;
 }
 #ttl {
   grid-column: 1;

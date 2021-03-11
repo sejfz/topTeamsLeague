@@ -27,6 +27,7 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
     <link href="style.css" rel='stylesheet'>
+    <link rel="stylesheet" href="../header.css">
     <script type="text/javascript" src="radarChart.js"></script>
     <script type="text/javascript" src="teamRadarChart.js"></script>
     <script type="text/javascript" src="visualization.js"></script>
@@ -47,8 +48,21 @@
     
     <div class="pageContent">
         <header id="header">
-            <h3 id="ttl">TopTeamsLeague</h3>
-        </header>
+            <ul>
+              <li style="float: left;"><p class="ttlLogo">TopTeamsLeague</p></li>
+              
+              <li><a href="../champAndTeam/topTeamsLeagueChampion.html">Champions</a></li>
+              <li><a href="../champAndTeam/topTeamsLeagueTeam.html">Teams</a></li>
+              <li class="header-dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Players</a>
+                <div class="header-dropdown-content">
+                  <a href="radarchart.html">Radarchart</a>
+                  <a href="../player-scatter.html">Parallel coordinates</a>
+                </div>
+              </li>
+              <li><a href="../index.html">Home</a></li>
+            </ul>
+          </header>
         
         <div id="headlineRow">
             <h4 id="headline1">Players</h4>
@@ -115,6 +129,7 @@
         </div>
         <div id="radarChart"></div>
     </div>
+    
     <!-- <div id="main" style="width: 600px;height:400px;"></div> -->
 
     <!-- <script type="text/javascript" src="echarts.js"></script> -->

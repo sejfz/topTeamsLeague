@@ -1,4 +1,4 @@
-var margin = {top: 66, right: 110, bottom: 20, left: 188},
+var margin = {top: 90, right: 140, bottom: 20, left: 188},
     width = document.body.clientWidth - margin.left - margin.right - 10, //Vad ska man ha här
     height = 460 - margin.top - margin.bottom,
     innerHeight = height - 2;
