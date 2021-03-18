@@ -18,7 +18,7 @@ function RadarChart(id, data, options, playerId) {
         roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
         color: d3.scale.category10()	//Color function
     };
-    console.log(data)
+    console.log(options.color)
 
     //Put all of the options into a variable called cfg
     if ('undefined' !== typeof options) {
