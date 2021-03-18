@@ -1,4 +1,8 @@
-function RadarChart(id, data, options) {
+function hej(yo) {
+    console.log(yo)
+}
+
+function RadarChart(id, data, options, playerId) {
     var cfg = {
         w: 100,				//Width of the circle
         h: 100,				//Height of the circle
@@ -155,6 +159,7 @@ function RadarChart(id, data, options) {
         .style("fill-opacity", cfg.opacityArea)
         .on('mouseover', function (d, i) {
             //Dim all blobs
+            
             d3.selectAll(".radarArea")
                 .transition().duration(200)
                 .style("fill-opacity", 0.1);
