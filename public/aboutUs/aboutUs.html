@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Player stats</title>
+    <title>About Us</title>
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -40,7 +40,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@4.6.0/dist/echarts.min.js"></script> -->
-
+    <script src="https://kit.fontawesome.com/a3a5fa6634.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
@@ -50,71 +50,177 @@
         <header id="header">
             <ul class="headerUl">
                 <li style="float: left;"><p class="ttlLogo" onclick="window.location='../index.html'">TopTeamsLeague</p></li>
-                
-                <li><a href="../champAndTeam/topTeamsLeagueChampion.html">Champions</a></li>
-                <li><a href="../champAndTeam/topTeamsLeagueTeam.html">Teams</a></li>
+                <li style="float: left;"><a href="aboutUs.html">About Us</a></li>
+                <li><a href="../topTeamsLeagueChampion.html">Champions</a></li>
+                <li><a href="../topTeamsLeagueTeam.html">Teams</a></li>
                 <li class="header-dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Players</a>
                 <div class="header-dropdown-content">
-                    <a href="radarchart.html">Radarchart</a>
+                    <a href="../radarchart/radarchart.html">Radarchart</a>
                     <a href="../player-scatter.html">Parallel coordinates</a>
                 </div>
                 </li>
                 <li><a href="../index.html">Home</a></li>
             </ul>
         </header>
-        <div>
-            <div class="card aboutUsCard col-sm-2">
+        <div class="description">
+            <div class="ourProject">
+                <h3 class="mt-3">Our project</h3>
+                <div class="descriptionWrapper">
+                    
+                    <p><iframe src="https://drive.google.com/file/d/1Mm-YfvIKtNVzNU4NKwkOWbF9mcdBbzLQ/preview" height="230" width="408.89" style="float: right; margin-left: 4px;"></iframe>
+                    This project aims to help LOL players and amateurs gain clear intuitive information by using multidimensional visualization tools. </br></br>
+                    This project was implemented as a part of the course Information Visualization at KTH - the Royal Institute of Technology. 
+                    The project proceeded for weeks and at the beginning of the project different responsibilities were distributed among the 
+                    team members to make sure that everyone had responsibilities.</br></br>
+                    Under Covid-19, the esports industry is growing and becoming more popular compared to the past. In this project, we focused 
+                    on the MOBA game and we chose League of Legends as our object. We were inspired by previous works in the competitive sports field 
+                    [2] and video game fields [1]. All the data we use are from Oracle's Elixir. [3] The concept idea and design were set through 
+                    iterative and explorative analysis of different visual structures and mappings, at the same time, the code structure was set up. 
+                    Prototyping of the user interface was conducted before the development of the visualization components.</br></br>
+                    In our project, we divide the data into three parts for visualization with aims for providing competitor analysis for gamers, acting 
+                    as game guidance for users. Different visualization structures were applied to show the three parts separately, and add different 
+                    interaction methods for each structure. 
+                    </p>
+                    <h6>Learning objectives reached</h6>
+
+                        <p>Project Top Teams League is the useful tool that we make, in order to give guidance. We as a group worked together to reached three of our goals mentioned in our proposal: </p>
+                        
+                        <ol>
+                            <li>We applied a parallel coordinate, radar chart, map view, and data sheet to visualize data in different ways.</li> 
+                            <li>We tackled a large amount of data and selected suitable data for our target user to analyze the game-League of Legend. </li>
+                            <li>With all the pages and functions we have, we made a comprehensible game tool that followed the visual information seeking mantra of: overview, zoom, filtering and details on demand. </li>
+                            
+                        </ol>
+                        <p>By building this website we have learned d3, Echarts, javascript, and python in 2 months, we also improved teamwork ability and time management during this 
+                            project. Feedback from the audience and our website users also help us have a better understanding of user experience and evaluation.</p>
+                
+                        <p>
+                            References:</br>
+                            <small style="font-size: 8px;">
+                                [1] Analytics of Play: Using Information Visualization and Gameplay Practices for Visualizing Video Game Data. Ben Medler, Brian Magerko. 2011</br>
+                                [2] State of the Art of Sports Data Visualization. C. Perin  R. Vuillemot  C. D. Stolper  J. T. Stasko  J. Wood  S. Carpendale. 2018</br>
+                                [3] <a href="https://oracleselixir.com/tools/downloads" target="_blank">Oracle's Elixir - Match Data Downloads</a>
+                            </small>
+                        </p>
+                </div>
+            </div>
+            <div class="knownIssues">
+                <h3 class="mt-3">Update feed</h3>
+                <div class="knownIssuesContent p-3">
+                    <h6 class="updateHeadline">Update according to the feedback:</h6>
+                    <p class="updateDate"> - 2021/3/18:</p>
+                    <ul>
+                        <li>Add project team information</li>
+                        <li>Grammar issues are fixed on the home page</li>
+                        <li>Three cards on the home page are clickable now</li>
+                        <li>Click part is more clear in the radar chart</li>
+                        <li>In player information parallel coordinate, hover your mouse on table to view the name of the abbreviation</li>
+                        <li>In player information parallel coordinate, click the head of each column to sort it according to that data</li>
+                        <li>Champion map is now responsive for different window size</li>
+                        <li>More concrete description is added for Champion map</li>
+                        <li>Colours are now always the same for players in chart view (unless you reload page)</li>
+                        <li>Filters can now individually be reset in player view</li>
+                        <li>If you click the headers in the player table you sort the table</li>
+                        <li>The colours in the player parallel coordinate plot corresponds to the colours in the team view</li>
+                    </ul>
+                    <h6 class="updateHeadline">Some developer comments:</h6>
+                    <p class="updateDate"> - 2021/3/18:</p>
+                    <ul>
+                        <li>Unfortunately some pages are mostly designed for (16:9) computer screens</li>
+                        <li>The hovering over player and highlighting chart is a lot more complicated than anticipated</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="members">
+
+            <!-- Bosen Cheng -->
+
+            <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/bosen.PNG" alt="Card image cap">
                 </div>
                 <div class="card-body pb-0">
                     <h6 class="card-title">Bosen Cheng</h6>
                     <ul class="infoUl">
+                        <li>Champion page</li>
+                        <li>Front/back end</li>
                         <li>UX</li>
-                        <li>Bossade</li>
-                        <li>Manager</li>
                     </ul>
+                    <p><a href="https://github.com/Unchained112" target="_blank"><i class="fa fa-github" style="font-size:20px"></i></a></p>
                 </div>
             </div>
+
+            <!-- Elias Åkerlund -->
+
             <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/elias1.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <h6 class="card-title">Elias Åkerlund</h6>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <ul class="infoUl">
+                        <li>Player pages</li>
+                        <li>Front/back end</li>
+                        <li>UX</li>
+                    </ul>
+                    <p>
+                        <a href="https://github.com/sejfz" target="_blank"><i class="fa fa-github" style="font-size:20px"></i></a>
+                        <a href="https://www.linkedin.com/in/elias-%C3%A5kerlund-ab23b4156/" target="_blank"><i class="fab fa-linkedin" style="font-size:20px"></i></a>
+                    </p>
                 </div>
             </div>
+
+            <!-- Elias Alkvist Cetin -->
+
             <div class="card aboutUsCard col-sm-4" >
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/elias2.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0 px-1">
                     <h6 class="card-title">Elias Alkvist Cetin</h6>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <ul class="infoUl">
+                        <li>Player pages</li>
+                        <li>Front/back end</li>
+                        <li>Data analysis</li>
+                    </ul>
+                    <p><a href="https://github.com/tjena1" target="_blank"><i class="fa fa-github" style="font-size:20px"></i></a></p>
                 </div>
             </div>
+
+            <!-- Ruina Wang -->
+
             <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/ruina.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <h6 class="card-title">Ruina Wang</h6>
-                    <p class="card-text"><small> is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</small></p>
+                    <ul class="infoUl">
+                        <li>Concept Designer</li>
+                        <li>UI Designer</li>
+                    </ul>
+                    <p><a href="https://github.com/ruiwa865" target="_blank"><i class="fa fa-github" style="font-size:20px"></i></a></p>
                 </div>
             </div>
+
+            <!-- Yifei Wang -->
+
             <div class="card aboutUsCard col-sm-4">
                 <div class="imageCropper">
                     <img class="card-img-top aboutUsImage" src="images/yifei.PNG" alt="Card image cap">
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <h6 class="card-title">Yifei Wang</h6>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <ul class="infoUl">
+                        <li>Programer</li>
+                        <li>UI Designer</li>
+                    </ul>
+                    <p><a href="https://github.com/yifeiw1218" target="_blank"><i class="fa fa-github" style="font-size:20px"></i></a></p>
                 </div>
             </div>
         </div>
-
 
     </div>
     <!-- <script type="text/javascript" src="echarts.js"></script> -->
